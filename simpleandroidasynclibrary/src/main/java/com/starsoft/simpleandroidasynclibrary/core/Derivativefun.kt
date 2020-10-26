@@ -25,30 +25,45 @@ import java.util.concurrent.ThreadPoolExecutor
 
 //This File Created at 26.10.2020 13:57.
 
+/**
+ * @since 0.1.0
+ */
 fun <T, R> T.runOnGlobalSinglePool(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,
     lambda: T.() -> R
 ): ThreadPoolExecutor = this.runOnExecutor(ExecutorsProvider.globalSingleTreadPoll, onResult, onError, lambda) as ThreadPoolExecutor
 
+/**
+ * @since 0.1.0
+ */
 fun <T, R> T.runOnGlobalMultiPool(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,
     lambda: T.() -> R
 ): ThreadPoolExecutor = this.runOnExecutor(ExecutorsProvider.globalMultiThreadPoll, onResult, onError, lambda) as ThreadPoolExecutor
 
+/**
+ * @since 0.1.0
+ */
 fun <R> runOnGlobalSinglePool(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,
     lambda: (Unit) -> R
 ): ThreadPoolExecutor = ExecutorsProvider.globalSingleTreadPoll.run(onResult, onError, lambda) as ThreadPoolExecutor
 
+/**
+ * @since 0.1.0
+ */
 fun <T, R> runOnGlobalMultiPool(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,
     lambda: (Unit) -> R
 ): ThreadPoolExecutor = ExecutorsProvider.globalMultiThreadPoll.run(onResult, onError, lambda) as ThreadPoolExecutor
 
+/**
+ * @since 0.1.0
+ */
 fun <T, R> Executor.executeWitch(
     receiver: T,
     onResult: (R) -> Unit = ::stub,
@@ -56,6 +71,9 @@ fun <T, R> Executor.executeWitch(
     lambda: T.() -> R
 ): Executor = runOnExecutorWitch(this, receiver, onResult, onError, lambda)
 
+/**
+ * @since 0.1.0
+ */
 fun <T, R> Executor.handle(
     data: T,
     onResult: (R) -> Unit = ::stub,
@@ -63,6 +81,9 @@ fun <T, R> Executor.handle(
     lambda: (T) -> R
 ): Executor = handleOnExecutor(this, data, onResult, onError, lambda)
 
+/**
+ * @since 0.1.0
+ */
 fun <R> Executor.run(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,

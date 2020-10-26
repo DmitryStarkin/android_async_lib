@@ -23,8 +23,9 @@ import com.starsoft.simpleandroidasynclibrary.runables.MainRunnable
 //This File Created at 25.10.2020 11:05.
 
 /**
+ * @suppress
  * @since 0.1.0
- * @suppress*/
+ * */
 const val DELIVER_ERROR = 0
 const val  DELIVER_RESULT = 1
 

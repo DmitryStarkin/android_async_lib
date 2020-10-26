@@ -22,7 +22,6 @@ import com.starsoft.simpleandroidasynclibrary.stubs.stubErrorCallback
 //This File Created at 25.10.2020 11:25.
 
 /**
- * @since 0.1.0
  * Calls the specified function [lambda] with `this` value
  * as its receiver and returns its result as callback
  * each call is made on a new thread
@@ -30,11 +29,11 @@ import com.starsoft.simpleandroidasynclibrary.stubs.stubErrorCallback
  * if this code is missing will be run [stub][stub]
  * @param onError the code that  handle the Exception,
  * if this code is missing will be run [stubErrorCallback][stubErrorCallback]
- *
  * [onError] and [onResult] are called in the main thread
  * @param _isDaemon determines whether the thread is a daemon, false by default
  * @return a reference to the thread in which the work
  * is performed can be used for example for interrupting
+ * @since 0.1.0
  */
 fun <T, R> T.runOnThread(
     onResult: (R) -> Unit = ::stub,
@@ -52,7 +51,6 @@ fun <T, R> T.runOnThread(
 }
 
 /**
- * @since 0.1.0
  * Calls the specified function [lambda] with the given [receiver] as its receiver
  * and returns its result as callback
  * each call is made on a new thread
@@ -60,11 +58,11 @@ fun <T, R> T.runOnThread(
  * if this code is missing will be run [stub][stub]
  * @param onError the code that  handle the Exception,
  * if this code is missing will be run [stubErrorCallback][stubErrorCallback]
- *
  * [onError] and [onResult] are called in the main thread
  *  @param _isDaemon determines whether the thread is a daemon, false by default
  * @return a reference to the thread in which the work
  * is performed can be used for example for interrupting
+ * @since 0.1.0
  */
 fun <T, R> runOnThreadWitch(
     receiver: T,
@@ -86,7 +84,6 @@ fun <T, R> runOnThreadWitch(
 }
 
 /**
- * @since 0.1.0
  * Calls the specified function [lambda]
  * with `this` value as its argument and returns its result as callback
  * each call is made on a new thread
@@ -94,11 +91,11 @@ fun <T, R> runOnThreadWitch(
  * if this code is missing will be run [stub][stub]
  * @param onError the code that  handle the Exception,
  * if this code is missing will be run [stubErrorCallback][stubErrorCallback]
- *
  * [onError] and [onResult] are called in the main thread
  * @param _isDaemon determines whether the thread is a daemon, false by default
  * @return a reference to the thread in which the work
  * is performed can be used for example for interrupting
+ * @since 0.1.0
  */
 
 fun <T, R> T.processingOnThread(
@@ -119,7 +116,6 @@ fun <T, R> T.processingOnThread(
 }
 
 /**
- * @since 0.1.0
  * Calls the specified function [lambda] with the given [data] as as its argument
  * and returns its result as callback
  * each call is made on a new thread
@@ -133,6 +129,7 @@ fun <T, R> T.processingOnThread(
  * @param _isDaemon determines whether the thread is a daemon, false by default
  * @return a reference to the thread in which the work
  * is performed can be used for example for interrupting
+ * @since 0.1.0
  */
 fun <T, R> handleOnThread(
     data: T,
@@ -154,7 +151,6 @@ fun <T, R> handleOnThread(
 }
 
 /**
- * @since 0.1.0
  * Calls the specified function [lambda]
  * with `this` value as its argument on a new thread
  * @param onResult Calls  on main thread with `this` value as its argument after
@@ -166,6 +162,7 @@ fun <T, R> handleOnThread(
  * @param _isDaemon determines whether the thread is a daemon, true by default
  * @return a reference to the thread in which the work
  * is performed can be used for example for interrupting
+ * @since 0.1.0
  */
 fun <T> T.prepareOnThreadAndRun(
     onResult: T.() -> Unit = ::rStub,
@@ -184,7 +181,9 @@ fun <T> T.prepareOnThreadAndRun(
     start()
 }
 
-/**@suppress*/
+/**
+ * @since 0.1.0
+ * @suppress*/
 fun <T> T.rStub(t: T) {
 
 }

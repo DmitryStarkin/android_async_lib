@@ -19,9 +19,9 @@ import android.os.Looper
 //This File Created at 26.10.2020 10:00.
 
 /**
- * @since 0.1.0
  * Defines the thread in which the function is called
  * @return true if called in Main tread false otherwise
+ * @since 0.1.0
  */
 
 fun isMainThread(): Boolean {

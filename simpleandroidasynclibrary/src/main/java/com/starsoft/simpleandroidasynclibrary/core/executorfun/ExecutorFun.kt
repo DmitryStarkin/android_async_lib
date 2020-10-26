@@ -23,7 +23,6 @@ import java.util.concurrent.Executor
 //This File Created at 25.10.2020 11:52.
 
 /**
- * @since 0.1.0
  * Calls the specified function [lambda] with `this` value
  * as its receiver and returns its result as callback
  * each call is made on a given [Executor]
@@ -32,9 +31,9 @@ import java.util.concurrent.Executor
  * if this code is missing will be run [stub][stub]
  * @param onError the code that  handle the Exception,
  * if this code is missing will be run [stubErrorCallback][stubErrorCallback]
- *
  * [onError] and [onResult] are called in the main thread
  * @return a reference to the [Executor] in which the work
+ * @since 0.1.0
  */
 fun <T, R> T.runOnExecutor(
     executor: Executor,
@@ -46,7 +45,6 @@ fun <T, R> T.runOnExecutor(
 }
 
 /**
- * @since 0.1.0
  * Calls the specified function [lambda] with the given [receiver] as its receiver
  * and returns its result as callback
  * each call is made on a given [Executor]
@@ -58,6 +56,7 @@ fun <T, R> T.runOnExecutor(
  *
  * [onError] and [onResult] are called in the main thread
  * @return a reference to the [Executor] in which the work
+ * @since 0.1.0
  */
 fun <T, R> runOnExecutorWitch(
     executor: Executor,
@@ -70,7 +69,6 @@ fun <T, R> runOnExecutorWitch(
 }
 
 /**
- * @since 0.1.0
  * Calls the specified function [lambda]
  * with `this` value as its argument and returns its result as callback
  * each call is made on a given [Executor]
@@ -82,6 +80,7 @@ fun <T, R> runOnExecutorWitch(
  *
  * [onError] and [onResult] are called in the main thread
  * @return a reference to the [Executor] in which the work
+ * @since 0.1.0
  */
 fun <T, R> T.processingOnExecutor(
     executor: Executor,
@@ -94,7 +93,6 @@ fun <T, R> T.processingOnExecutor(
 
 
 /**
- * @since 0.1.0
  * Calls the specified function [lambda] with the given [data] as as its argument
  * and returns its result as callback
  * each call is made on a given [Executor]
@@ -104,9 +102,9 @@ fun <T, R> T.processingOnExecutor(
  * if this code is missing will be run [stub][stub]
  * @param onError the code that  handle the Exception,
  * if this code is missing will be run [stubErrorCallback][stubErrorCallback]
- *
  * [onError] and [onResult] are called in the main thread
  * @return a reference to the [Executor] in which the work
+ * @since 0.1.0
  */
 fun <T, R> handleOnExecutor(
     executor: Executor,
@@ -119,7 +117,6 @@ fun <T, R> handleOnExecutor(
 }
 
 /**
- * @since 0.1.0
  * Calls the specified function [lambda]
  * with `this` value as its argument on a given [Executor]
  * @param executor [Executor] for perform work
@@ -131,6 +128,7 @@ fun <T, R> handleOnExecutor(
  * [onError] and [onResult] are called in the main thread
  * @return a reference to the [Executor] in which the work
  * is performed
+ * @since 0.1.0
  */
 fun <T> T.prepareOnExecutorAndRun(
     executor: Executor,
@@ -150,7 +148,8 @@ fun <T> T.prepareOnExecutorAndRun(
 
 /**
  * @since 0.1.0
- * @suppress*/
+ * @suppress
+ * */
 fun <T> T.rStub(t: T) {
 
 }

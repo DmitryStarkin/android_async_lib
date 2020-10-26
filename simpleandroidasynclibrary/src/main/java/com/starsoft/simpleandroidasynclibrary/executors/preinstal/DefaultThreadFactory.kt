@@ -20,8 +20,9 @@ import java.util.concurrent.atomic.AtomicInteger
 //This File Created at 25.10.2020 17:57.
 
 /**
+ * @suppress
  * @since 0.1.0
- * @suppress*/
+ * */
 object DefaultThreadFactory : ThreadFactory {
 
     private const val THREAD_NAME_PREFIX = "Async_android_lib_worker-"
