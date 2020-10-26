@@ -19,13 +19,12 @@ import java.util.concurrent.ThreadFactory
 import java.util.concurrent.TimeUnit
 
 
-/**
- *This File Created at 25.10.2020 18:03.
- **/
+//This File Created at 25.10.2020 18:03.
+
 /**
  * @since 0.1.0
+ * @suppress
  */
-/**@suppress*/
 open class MultiThreadPool internal constructor(): AbstractThreadPool() {
 
     override val ALLOW_CORE_THREAD_TIME_OUT: Boolean?= DEFAULT

@@ -35,7 +35,7 @@ private const val DEFAULT_THREAD_IDLE_TIME: Long = 30
 private const val DEFAULT_ALLOW_CORE_THREAD_TIME_OUT: Boolean = false
 private val DEFAULT_TIME_UNIT: TimeUnit? = TimeUnit.SECONDS
 
-
+/**@suppress*/
 abstract class AbstractThreadPool : ThreadPoolExecutor(
     DEFAULT_CORE_POOL_SIZE,
     DEFAULT_MAX_POOL_SIZE,
