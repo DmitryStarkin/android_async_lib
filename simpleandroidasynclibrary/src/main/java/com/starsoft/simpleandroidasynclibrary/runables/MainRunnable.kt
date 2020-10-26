@@ -21,15 +21,11 @@ import com.starsoft.simpleandroidasynclibrary.handlers.DELIVER_ERROR
 import com.starsoft.simpleandroidasynclibrary.handlers.DELIVER_RESULT
 import com.starsoft.simpleandroidasynclibrary.handlers.MainHandler
 
-/**
- *This File Created at 25.10.2020 11:05.
- **/
+//This File Created at 25.10.2020 11:05.
 
 /**
  * @since 0.1.0
- */
-
-/**@suppress*/
+ * @suppress*/
 class MainRunnable<T, V>(
     private var data: T?,
     private var onResult: ((V) -> Unit)?,

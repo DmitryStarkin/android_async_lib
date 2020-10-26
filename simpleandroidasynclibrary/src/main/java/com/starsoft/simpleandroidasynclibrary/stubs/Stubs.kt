@@ -15,34 +15,36 @@
 package com.starsoft.simpleandroidasynclibrary.stubs
 
 
-/**
- *This File Created at 25.10.2020 11:24.
- **/
+//This File Created at 25.10.2020 11:24.
 
 /**
+ * @since 0.1.0
  * This is stub for Callbacks
  * in case you don't need to do anything
- *  @since 1.0
  */
 fun <T> stub(par: T) {
 
 }
 
 /**
+ * @since 0.1.0
  * This is stub for ErrorCallback
  * in case you don't need to to handle Exception
  * the exception will simply be throw
- * @since 1.0
  */
 fun stubErrorCallback(par: Throwable) {
     throw par
 }
 
-/**@suppress*/
+/**
+ * @since 0.1.0
+ * @suppress*/
 fun <T> T.rStub() {
 
 }
 
-/**@suppress*/
+/**
+ * @since 0.1.0
+ * @suppress*/
 @Suppress("UNCHECKED_CAST")
 fun <T> TStub(): T = Any() as T

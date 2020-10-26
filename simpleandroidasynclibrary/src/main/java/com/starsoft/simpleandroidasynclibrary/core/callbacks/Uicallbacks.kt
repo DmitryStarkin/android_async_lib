@@ -16,14 +16,10 @@ package com.starsoft.simpleandroidasynclibrary.core.callbacks
 
 import com.starsoft.simpleandroidasynclibrary.handlers.MainHandler
 
+//This File Created at 25.10.2020 11:55.
 
 /**
- *This File Created at 25.10.2020 11:55.
- **/
-/**
  * @since 0.1.0
- */
-/**
  * Calls `this` as function in UI (Main) thread
  * @param data data that will be passed to function as an input parameter
  */
@@ -32,6 +28,7 @@ fun <T, V> ((T) -> V).runInUI(data: T) {
 }
 
 /**
+ * @since 0.1.0
  * Calls `this` as function in UI (Main) thread
  */
 fun <V> (() -> V).runInUI() {
@@ -39,6 +36,7 @@ fun <V> (() -> V).runInUI() {
 }
 
 /**
+ * @since 0.1.0
  * Calls [lambda] as function in UI (Main) thread
  * @param lambda function to call
  * @param data data that will be passed to lambda as an input parameter
@@ -48,6 +46,7 @@ fun <T, V> runOnUI(data: T , lambda: (T) -> V) {
 }
 
 /**
+ * @since 0.1.0
  * Calls [lambda] as function in UI (Main) thread
  * @param lambda function to call
  */

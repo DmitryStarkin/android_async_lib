@@ -23,9 +23,7 @@ import java.util.concurrent.Executor
 import java.util.concurrent.ThreadPoolExecutor
 
 
-/**
- *This File Created at 25.10.2020 17:33.
- **/
+//This File Created at 25.10.2020 17:33.
 
 /**
  * @since 0.1.0
@@ -70,6 +68,9 @@ object ExecutorsProvider {
 
 }
 
+/**
+ * @since 0.1.0
+ */
 class MainSingleThreadPoll(): SingleThreadPoll(){
 
     override fun shutdown() {
@@ -77,6 +78,9 @@ class MainSingleThreadPoll(): SingleThreadPoll(){
     }
 }
 
+/**
+ * @since 0.1.0
+ */
 class MainMultiThreadPool(): MultiThreadPool(){
 
     override fun shutdown() {

@@ -20,15 +20,11 @@ import android.os.Message
 import com.starsoft.simpleandroidasynclibrary.runables.MainRunnable
 
 
-/**
- *This File Created at 25.10.2020 11:05.
- **/
+//This File Created at 25.10.2020 11:05.
 
 /**
  * @since 0.1.0
- */
-
-/**@suppress*/
+ * @suppress*/
 const val DELIVER_ERROR = 0
 const val  DELIVER_RESULT = 1
 

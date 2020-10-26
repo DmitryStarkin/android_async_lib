@@ -19,13 +19,10 @@ import com.starsoft.simpleandroidasynclibrary.executors.ExecutorsProvider
 import com.starsoft.simpleandroidasynclibrary.stubs.stub
 import com.starsoft.simpleandroidasynclibrary.stubs.stubErrorCallback
 
-/**
- *This File Created at 25.10.2020 11:25.
- **/
+//This File Created at 25.10.2020 11:25.
+
 /**
  * @since 0.1.0
- */
-/**
  * Calls the specified function [lambda] with `this` value
  * as its receiver and returns its result as callback
  * each call is made on a new thread
@@ -55,6 +52,7 @@ fun <T, R> T.runOnThread(
 }
 
 /**
+ * @since 0.1.0
  * Calls the specified function [lambda] with the given [receiver] as its receiver
  * and returns its result as callback
  * each call is made on a new thread
@@ -88,6 +86,7 @@ fun <T, R> runOnThreadWitch(
 }
 
 /**
+ * @since 0.1.0
  * Calls the specified function [lambda]
  * with `this` value as its argument and returns its result as callback
  * each call is made on a new thread
@@ -120,6 +119,7 @@ fun <T, R> T.processingOnThread(
 }
 
 /**
+ * @since 0.1.0
  * Calls the specified function [lambda] with the given [data] as as its argument
  * and returns its result as callback
  * each call is made on a new thread
@@ -154,6 +154,7 @@ fun <T, R> handleOnThread(
 }
 
 /**
+ * @since 0.1.0
  * Calls the specified function [lambda]
  * with `this` value as its argument on a new thread
  * @param onResult Calls  on main thread with `this` value as its argument after

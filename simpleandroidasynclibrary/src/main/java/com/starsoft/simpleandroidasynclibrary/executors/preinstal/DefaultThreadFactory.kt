@@ -17,14 +17,11 @@ package com.starsoft.simpleandroidasynclibrary.executors.preinstal
 import java.util.concurrent.ThreadFactory
 import java.util.concurrent.atomic.AtomicInteger
 
+//This File Created at 25.10.2020 17:57.
 
 /**
- *This File Created at 25.10.2020 17:57.
- **/
-/**
  * @since 0.1.0
- */
-/**@suppress*/
+ * @suppress*/
 object DefaultThreadFactory : ThreadFactory {
 
     private const val THREAD_NAME_PREFIX = "Async_android_lib_worker-"

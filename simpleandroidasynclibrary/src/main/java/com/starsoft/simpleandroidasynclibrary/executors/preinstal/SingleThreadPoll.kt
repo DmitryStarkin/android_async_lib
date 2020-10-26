@@ -18,7 +18,6 @@ import java.util.concurrent.RejectedExecutionHandler
 import java.util.concurrent.ThreadFactory
 import java.util.concurrent.TimeUnit
 
-
 //This File Created at 25.10.2020 18:03.
 
 /**
@@ -36,6 +35,6 @@ open class SingleThreadPoll internal constructor(): AbstractThreadPool() {
     override val REGECTED_TASK_HANDLER: RejectedExecutionHandler? = DEFAULT
 
     init {
-        build()
+        adjust()
     }
 }

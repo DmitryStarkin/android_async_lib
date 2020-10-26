@@ -14,21 +14,16 @@
 
 package com.starsoft.simpleandroidasynclibrary.core.executorfun
 
-
-
 import com.starsoft.simpleandroidasynclibrary.runables.MainRunnable
 import com.starsoft.simpleandroidasynclibrary.stubs.TStub
 import com.starsoft.simpleandroidasynclibrary.stubs.stub
 import com.starsoft.simpleandroidasynclibrary.stubs.stubErrorCallback
 import java.util.concurrent.Executor
 
-/**
- *This File Created at 25.10.2020 11:52.
- **/
+//This File Created at 25.10.2020 11:52.
+
 /**
  * @since 0.1.0
- */
-/**
  * Calls the specified function [lambda] with `this` value
  * as its receiver and returns its result as callback
  * each call is made on a given [Executor]
@@ -51,6 +46,7 @@ fun <T, R> T.runOnExecutor(
 }
 
 /**
+ * @since 0.1.0
  * Calls the specified function [lambda] with the given [receiver] as its receiver
  * and returns its result as callback
  * each call is made on a given [Executor]
@@ -74,6 +70,7 @@ fun <T, R> runOnExecutorWitch(
 }
 
 /**
+ * @since 0.1.0
  * Calls the specified function [lambda]
  * with `this` value as its argument and returns its result as callback
  * each call is made on a given [Executor]
@@ -97,6 +94,7 @@ fun <T, R> T.processingOnExecutor(
 
 
 /**
+ * @since 0.1.0
  * Calls the specified function [lambda] with the given [data] as as its argument
  * and returns its result as callback
  * each call is made on a given [Executor]
@@ -121,6 +119,7 @@ fun <T, R> handleOnExecutor(
 }
 
 /**
+ * @since 0.1.0
  * Calls the specified function [lambda]
  * with `this` value as its argument on a given [Executor]
  * @param executor [Executor] for perform work
@@ -149,7 +148,9 @@ fun <T> T.prepareOnExecutorAndRun(
 }
 
 
-/**@suppress*/
+/**
+ * @since 0.1.0
+ * @suppress*/
 fun <T> T.rStub(t: T) {
 
 }

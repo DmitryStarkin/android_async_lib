@@ -16,14 +16,11 @@ package com.starsoft.simpleandroidasynclibrary.executors.preinstal
 
 import java.util.concurrent.*
 
+ //This File Created at 25.10.2020 17:54.
 
 /**
- *This File Created at 25.10.2020 17:54.
- **/
-/**
  * @since 0.1.0
- */
-/**@suppress*/
+ * @suppress*/
 private fun determineNumberOfProcessors() = Runtime.getRuntime().availableProcessors()
 
 val DEFAULT: Nothing? = null
@@ -35,7 +32,9 @@ private const val DEFAULT_THREAD_IDLE_TIME: Long = 30
 private const val DEFAULT_ALLOW_CORE_THREAD_TIME_OUT: Boolean = false
 private val DEFAULT_TIME_UNIT: TimeUnit? = TimeUnit.SECONDS
 
-/**@suppress*/
+/**
+ * @since 0.1.0
+ * @suppress*/
 abstract class AbstractThreadPool : ThreadPoolExecutor(
     DEFAULT_CORE_POOL_SIZE,
     DEFAULT_MAX_POOL_SIZE,
@@ -52,7 +51,7 @@ abstract class AbstractThreadPool : ThreadPoolExecutor(
     abstract val THREAD_FACTORY: ThreadFactory?
     abstract val REGECTED_TASK_HANDLER: RejectedExecutionHandler?
 
-    fun build() {
+    fun adjust() {
         allowCoreThreadTimeOut(ALLOW_CORE_THREAD_TIME_OUT ?: DEFAULT_ALLOW_CORE_THREAD_TIME_OUT)
         setKeepAliveTime(THREAD_IDLE_TIME?.takeUnless {
             it == 0L && (ALLOW_CORE_THREAD_TIME_OUT ?: DEFAULT_ALLOW_CORE_THREAD_TIME_OUT)
