@@ -20,7 +20,9 @@ import com.starsoft.simpleandroidasynclibrary.handlers.MainHandler
 /**
  *This File Created at 25.10.2020 11:55.
  **/
-
+/**
+ * @since 0.1.0
+ */
 /**
  * Calls `this` as function in UI (Main) thread
  * @param data data that will be passed to function as an input parameter

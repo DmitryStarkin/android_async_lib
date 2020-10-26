@@ -27,6 +27,9 @@ import java.util.concurrent.ThreadPoolExecutor
 /**
  *This File Created at 26.10.2020 13:57.
  **/
+/**
+ * @since 0.1.0
+ */
 fun <T, R> T.runOnGlobalSinglePool(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,

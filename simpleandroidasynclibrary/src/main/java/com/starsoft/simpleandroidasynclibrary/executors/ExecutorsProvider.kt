@@ -27,6 +27,10 @@ import java.util.concurrent.ThreadPoolExecutor
  *This File Created at 25.10.2020 17:33.
  **/
 
+/**
+ * @since 0.1.0
+ */
+
 object ExecutorsProvider {
 
     val globalSingleTreadPoll: MainSingleThreadPoll by lazy {

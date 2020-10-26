@@ -25,9 +25,10 @@ import com.starsoft.simpleandroidasynclibrary.runables.MainRunnable
  **/
 
 /**
- * @since 1.0
+ * @since 0.1.0
  */
 
+/**@suppress*/
 const val DELIVER_ERROR = 0
 const val  DELIVER_RESULT = 1
 

@@ -6,6 +6,9 @@ but it is fully functional
 The library provide extension functions for easy execution of tasks in thread,
 and send lambda for update UI (like runOnUiThread in Android)
 
+## Current version:
+0.1.0b
+
 ## Installation:
 
 1 in project level build.gradle add:

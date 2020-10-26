@@ -20,7 +20,10 @@ import java.util.concurrent.*
 /**
  *This File Created at 25.10.2020 17:54.
  **/
-
+/**
+ * @since 0.1.0
+ */
+/**@suppress*/
 private fun determineNumberOfProcessors() = Runtime.getRuntime().availableProcessors()
 
 val DEFAULT: Nothing? = null

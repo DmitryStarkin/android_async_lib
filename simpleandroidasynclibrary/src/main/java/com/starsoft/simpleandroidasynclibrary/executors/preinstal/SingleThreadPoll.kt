@@ -22,6 +22,12 @@ import java.util.concurrent.TimeUnit
 /**
  *This File Created at 25.10.2020 17:59.
  **/
+
+/**
+ * @since 0.1.0
+ */
+
+/**@suppress*/
 open class SingleThreadPoll internal constructor(): AbstractThreadPool() {
 
     override val ALLOW_CORE_THREAD_TIME_OUT: Boolean?= DEFAULT

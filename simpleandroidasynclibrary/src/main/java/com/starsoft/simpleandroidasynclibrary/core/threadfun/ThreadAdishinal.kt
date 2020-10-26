@@ -22,7 +22,9 @@ import com.starsoft.simpleandroidasynclibrary.stubs.stubErrorCallback
 /**
  *This File Created at 25.10.2020 11:25.
  **/
-
+/**
+ * @since 0.1.0
+ */
 /**
  * Calls the specified function [lambda] with `this` value
  * as its receiver and returns its result as callback

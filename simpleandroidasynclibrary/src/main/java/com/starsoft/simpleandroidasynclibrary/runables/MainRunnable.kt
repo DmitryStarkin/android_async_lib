@@ -26,9 +26,10 @@ import com.starsoft.simpleandroidasynclibrary.handlers.MainHandler
  **/
 
 /**
- * @since 1.0
+ * @since 0.1.0
  */
 
+/**@suppress*/
 class MainRunnable<T, V>(
     private var data: T?,
     private var onResult: ((V) -> Unit)?,
