@@ -1,9 +1,6 @@
 # A small Kotlin library for asynchronous task on Android
 
-This library is written for educational purposes in the Kotlin language,  
-but it is fully functional
-
-The library provide extension functions for easy execution of tasks in thread,
+The library provide functions for easy execution of tasks in thread use lambda style,
 and send lambda for update UI (like runOnUiThread in Android)
 
 ## Current version:
