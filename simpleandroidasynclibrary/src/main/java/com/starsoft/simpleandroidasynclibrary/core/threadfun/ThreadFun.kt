@@ -124,7 +124,6 @@ fun <T, R> T.processingOnThread(
  * if this code is missing will be run [stub][stub]
  * @param onError the code that  handle the Exception,
  * if this code is missing will be run [stubErrorCallback][stubErrorCallback]
- *
  * [onError] and [onResult] are called in the main thread
  * @param _isDaemon determines whether the thread is a daemon, false by default
  * @return a reference to the thread in which the work

@@ -53,7 +53,6 @@ fun <T, R> T.runOnExecutor(
  * if this code is missing will be run [stub][stub]
  * @param onError the code that  handle the Exception,
  * if this code is missing will be run [stubErrorCallback][stubErrorCallback]
- *
  * [onError] and [onResult] are called in the main thread
  * @return a reference to the [Executor] in which the work
  * @since 0.1.0
@@ -77,7 +76,6 @@ fun <T, R> runOnExecutorWitch(
  * if this code is missing will be run [stub][stub]
  * @param onError the code that  handle the Exception,
  * if this code is missing will be run [stubErrorCallback][stubErrorCallback]
- *
  * [onError] and [onResult] are called in the main thread
  * @return a reference to the [Executor] in which the work
  * @since 0.1.0

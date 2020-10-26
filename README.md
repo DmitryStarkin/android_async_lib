@@ -38,7 +38,7 @@ The library contains a Class that provides implementations of executors:
 globalSingleTreadPoll - operations are performed on a thread pool with a single thread that exists in a single instance within the application process.
 
 globalMultiThreadPoll - operations are performed on a thread pool with a starting number of threads equal to the number of processors + 1  
-and a maximum number of processors * 2. this pool exists in a single instance within the application process.
+and a maximum number of threads equal to the number of processors * 2. this pool exists in a single instance within the application process.
 
 newSingleThreadPoll() - the same as globalSingleTreadPoll but return new instance each time
 
