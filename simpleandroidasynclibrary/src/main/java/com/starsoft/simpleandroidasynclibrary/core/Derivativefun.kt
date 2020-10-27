@@ -18,6 +18,7 @@ import com.starsoft.simpleandroidasynclibrary.core.executorfun.handleOnExecutor
 import com.starsoft.simpleandroidasynclibrary.core.executorfun.runOnExecutor
 import com.starsoft.simpleandroidasynclibrary.core.executorfun.runOnExecutorWitch
 import com.starsoft.simpleandroidasynclibrary.executors.ExecutorsProvider
+import com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.handlerthreads.HandlerThreadExecutor
 import com.starsoft.simpleandroidasynclibrary.stubs.stub
 import com.starsoft.simpleandroidasynclibrary.stubs.stubErrorCallback
 import java.util.concurrent.Executor
@@ -32,7 +33,12 @@ fun <T, R> T.runOnGlobalSinglePool(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,
     lambda: T.() -> R
-): ThreadPoolExecutor = this.runOnExecutor(ExecutorsProvider.globalSingleTreadPoll, onResult, onError, lambda) as ThreadPoolExecutor
+): ThreadPoolExecutor = this.runOnExecutor(
+    ExecutorsProvider.globalSingleTreadPoll,
+    onResult,
+    onError,
+    lambda
+) as ThreadPoolExecutor
 
 /**
  * @since 0.1.0
@@ -41,7 +47,26 @@ fun <T, R> T.runOnGlobalMultiPool(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,
     lambda: T.() -> R
-): ThreadPoolExecutor = this.runOnExecutor(ExecutorsProvider.globalMultiThreadPoll, onResult, onError, lambda) as ThreadPoolExecutor
+): ThreadPoolExecutor = this.runOnExecutor(
+    ExecutorsProvider.globalMultiThreadPoll,
+    onResult,
+    onError,
+    lambda
+) as ThreadPoolExecutor
+
+/**
+ * @since 0.1.1
+ */
+fun <T, R> T.runOnGlobalHandlerThread(
+    onResult: (R) -> Unit = ::stub,
+    onError: (Throwable) -> Unit = ::stubErrorCallback,
+    lambda: T.() -> R
+): HandlerThreadExecutor = this.runOnExecutor(
+    ExecutorsProvider.globalHandlerThread,
+    onResult,
+    onError,
+    lambda
+) as HandlerThreadExecutor
 
 /**
  * @since 0.1.0
@@ -50,16 +75,28 @@ fun <R> runOnGlobalSinglePool(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,
     lambda: (Unit) -> R
-): ThreadPoolExecutor = ExecutorsProvider.globalSingleTreadPoll.run(onResult, onError, lambda) as ThreadPoolExecutor
+): ThreadPoolExecutor =
+    ExecutorsProvider.globalSingleTreadPoll.run(onResult, onError, lambda) as ThreadPoolExecutor
+
+/**
+ * @since 0.1.1
+ */
+fun <R> runOnGlobalHandlerThread(
+    onResult: (R) -> Unit = ::stub,
+    onError: (Throwable) -> Unit = ::stubErrorCallback,
+    lambda: (Unit) -> R
+): HandlerThreadExecutor =
+    ExecutorsProvider.globalHandlerThread.run(onResult, onError, lambda) as HandlerThreadExecutor
 
 /**
  * @since 0.1.0
  */
-fun <T, R> runOnGlobalMultiPool(
+fun <R> runOnGlobalMultiPool(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,
     lambda: (Unit) -> R
-): ThreadPoolExecutor = ExecutorsProvider.globalMultiThreadPoll.run(onResult, onError, lambda) as ThreadPoolExecutor
+): ThreadPoolExecutor =
+    ExecutorsProvider.globalMultiThreadPoll.run(onResult, onError, lambda) as ThreadPoolExecutor
 
 /**
  * @since 0.1.0

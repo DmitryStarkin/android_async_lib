@@ -16,8 +16,10 @@ package com.starsoft.simpleandroidasynclibrary.executors
 
 import android.os.HandlerThread
 import com.starsoft.simpleandroidasynclibrary.core.utils.isMainThread
-import com.starsoft.simpleandroidasynclibrary.executors.preinstal.MultiThreadPool
-import com.starsoft.simpleandroidasynclibrary.executors.preinstal.SingleThreadPoll
+import com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.handlerthreads.HandlerThreadExecutor
+import com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.threadpools.MultiThreadPool
+import com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.threadpools.SingleThreadPool
+import com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.threads.SingleThreadExecutor
 import com.starsoft.simpleandroidasynclibrary.handlers.MainHandler
 import java.util.concurrent.Executor
 import java.util.concurrent.ThreadPoolExecutor
@@ -35,10 +37,12 @@ object ExecutorsProvider {
     /**
      * Providing [Executor] as a thread pool with a single thread
      * that exists in a single instance within the application process
+     * You impossible shutdown this ThreadPool
+     * This ThreadPool cant connect to Lifecycle
      * @since 0.1.0
      */
-    val globalSingleTreadPoll: MainSingleThreadPoll by lazy {
-        MainSingleThreadPoll()
+    val globalSingleTreadPoll: ThreadPoolExecutor by lazy {
+        SingleThreadPool().apply { allowFinalize = false }
     }
 
     /**
@@ -46,30 +50,45 @@ object ExecutorsProvider {
      * of threads equal to the number of processors + 1
      * and a maximum number of threads equal to the number of processors * 2.
      * This pool exists in a single instance within the application process
+     * You impossible shutdown this ThreadPool
+     * This ThreadPool cant connect to Lifecycle
      * @since 0.1.0
      */
-    val globalMultiThreadPoll: MainMultiThreadPool by lazy {
-        MainMultiThreadPool()
+    val globalMultiThreadPoll: ThreadPoolExecutor by lazy {
+        MultiThreadPool().apply { allowFinalize = false }
     }
 
     /**
+     * Providing [Executor] as a  new [HandlerThread][android.os.HandlerThread]
+     * This [Executor] exists in a single instance within the application process
+     * @return [Executor] that uses a [HandlerThread][android.os.HandlerThread] to perform a task,
+     * this HandlerThread is returned running and does not require calling the start method
+     * You impossible quit this [HandlerThread][android.os.HandlerThread]
+     * This [Executor] cant connect to Lifecycle
      * @since 0.1.0
-     * @suppress*/
+     */
     val globalHandlerThread: Executor by lazy {
-        object : Executor, HandlerThread("common HandlerThread") {
-            override fun execute(command: Runnable?) {
-                TODO("Not yet implemented")
-            }
-
+        HandlerThreadExecutor("Global HandlerThread").apply {
+            allowFinalize = false
+            start()
         }
     }
+
+    /**
+     * Providing [Executor] as a  new [HandlerThread][android.os.HandlerThread] created for execution each time
+     * @return [Executor] that uses a [HandlerThread][android.os.HandlerThread] to perform a task,
+     * this HandlerThread is returned running and does not require calling the start method
+     * @param id Id for this [HandlerThread][android.os.HandlerThread]
+     * @since 0.1.1
+     */
+    fun newHandlerThread(id :String = ""): Executor = HandlerThreadExecutor(id).apply { start() }
 
     /**
      * Providing [Executor] as a  new thread created for execution each time
      * @return [Executor] that uses a new thread to perform a task
      * @since 0.1.0
      */
-    fun newThread(): Executor = Executor { command -> Thread(command).start() }
+    fun newThread(): Executor = SingleThreadExecutor()
 
     /**
      * Providing [Executor] that executes a task in the thread where it was called
@@ -89,7 +108,6 @@ object ExecutorsProvider {
         } else {
             Executor { command -> MainHandler.post(command) }
         }
-
     }
 
     /**
@@ -97,7 +115,7 @@ object ExecutorsProvider {
      * @return [ThreadPoolExecutor] with a single thread
      * @since 0.1.0
      */
-    fun newSingleThreadPoll(): ThreadPoolExecutor = SingleThreadPoll()
+    fun newSingleThreadPool(): ThreadPoolExecutor = SingleThreadPool()
 
     /**
      * Providing [Executor] as a new thread pool with a starting number
@@ -106,36 +124,4 @@ object ExecutorsProvider {
      * @since 0.1.0
      */
     fun newMultiThreadPoll(): ThreadPoolExecutor = MultiThreadPool()
-
-}
-
-/**
- * A class that implements a global thread pool with a single thread
- * @since 0.1.0
- */
-class MainSingleThreadPoll() : SingleThreadPoll() {
-    /**
-     * This feature makes it impossible for the global thread pool to stop working
-     * @since 0.1.0
-     */
-    override fun shutdown() {
-        print("Main ThreadPoll cant shutdown")
-    }
-}
-
-/**
- * A class that implements a global thread pool with a starting number
- * of threads equal to the number of processors + 1
- * and a maximum number of threads equal to the number of processors * 2.
- * @since 0.1.0
- */
-class MainMultiThreadPool() : MultiThreadPool() {
-
-    /**
-     * this feature makes it impossible for the global thread pool to stop working
-     * @since 0.1.0
-     */
-    override fun shutdown() {
-        print("Main ThreadPoll cant shutdown")
-    }
 }

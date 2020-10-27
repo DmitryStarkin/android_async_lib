@@ -1,8 +1,12 @@
 com.starsoft.simpleandroidasynclibrary.core
 com.starsoft.simpleandroidasynclibrary.core.callbacks
 com.starsoft.simpleandroidasynclibrary.core.executorfun
+com.starsoft.simpleandroidasynclibrary.core.lifeciclesupport.extends
+com.starsoft.simpleandroidasynclibrary.core.lifeciclesupport.interfaces
 com.starsoft.simpleandroidasynclibrary.core.threadfun
 com.starsoft.simpleandroidasynclibrary.core.utils
 com.starsoft.simpleandroidasynclibrary.executors
-com.starsoft.simpleandroidasynclibrary.executors.preinstal
+com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.handlerthreads
+com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.threadpools
+com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.threads
 com.starsoft.simpleandroidasynclibrary.stubs

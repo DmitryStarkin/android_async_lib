@@ -12,7 +12,7 @@
  *  limitations under the License.
  */
 
-package com.starsoft.simpleandroidasynclibrary.executors.preinstal
+package com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.threadpools
 
 import java.util.concurrent.ThreadFactory
 import java.util.concurrent.atomic.AtomicInteger

@@ -12,7 +12,7 @@
  *  limitations under the License.
  */
 
-package com.starsoft.simpleandroidasynclibrary.executors.preinstal
+package com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.threadpools
 
 import java.util.concurrent.RejectedExecutionHandler
 import java.util.concurrent.ThreadFactory
@@ -21,18 +21,20 @@ import java.util.concurrent.TimeUnit
 //This File Created at 25.10.2020 18:03.
 
 /**
+ * Thread pool with a single thread
+ * This ThreadPool can connect to Lifecycle
+ * by [connectToLifecycle][com.starsoft.simpleandroidasynclibrary.core.lifeciclesupport.interfaces.LifecycleSupport.connectToLifecycle] method
  * @since 0.1.0
- * @suppress
  */
-open class SingleThreadPoll internal constructor(): AbstractThreadPool() {
+class SingleThreadPool: AbstractThreadPool() {
 
-    override val ALLOW_CORE_THREAD_TIME_OUT: Boolean?= DEFAULT
-    override val CORE_POOL_SIZE: Int? = 1
-    override val MAX_POOL_SIZE: Int? = 1
-    override val THREAD_IDLE_TIME: Long? = 0L
-    override val TIME_UNIT: TimeUnit? = DEFAULT
-    override val THREAD_FACTORY: ThreadFactory? = DEFAULT
-    override val REGECTED_TASK_HANDLER: RejectedExecutionHandler? = DEFAULT
+    override val allowCoreThreadTimeOut: Boolean?= DEFAULT
+    override val startPoolSize: Int? = 1
+    override val maxPoolSize: Int? = 1
+    override val threadIdleTime: Long? = 0L
+    override val timeUnit: TimeUnit? = DEFAULT
+    override val factory: ThreadFactory? = DEFAULT
+    override val rejectedTaskHandler: RejectedExecutionHandler? = DEFAULT
 
     init {
         adjust()

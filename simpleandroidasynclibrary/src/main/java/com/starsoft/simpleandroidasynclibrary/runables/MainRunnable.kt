@@ -14,8 +14,7 @@
 
 package com.starsoft.simpleandroidasynclibrary.runables
 
-import android.os.Looper
-import androidx.lifecycle.DefaultLifecycleObserver
+import com.starsoft.simpleandroidasynclibrary.core.lifeciclesupport.interfaces.LifecycleSupport
 import com.starsoft.simpleandroidasynclibrary.core.utils.isMainThread
 import com.starsoft.simpleandroidasynclibrary.handlers.DELIVER_ERROR
 import com.starsoft.simpleandroidasynclibrary.handlers.DELIVER_RESULT
@@ -31,7 +30,7 @@ class MainRunnable<T, V>(
     private var onResult: ((V) -> Unit)?,
     private var onError: ((Throwable) -> Unit)?,
     private var lambda: ((T) -> V)?
-) : Runnable, DefaultLifecycleObserver {
+) : Runnable, LifecycleSupport {
 
     private var result: V? = null
     var error: Throwable? = null
@@ -50,12 +49,12 @@ class MainRunnable<T, V>(
 
     fun deliverResult() {
         result?.let { onResult?.invoke(it) }
-        finalize()
+        finalizeThis()
     }
 
     fun deliverError() {
         error?.let { onError?.invoke(it) }
-        finalize()
+        finalizeThis()
     }
 
     private fun sendCommandToHandler(command: Int) {
@@ -76,10 +75,15 @@ class MainRunnable<T, V>(
         }
     }
 
-    private fun finalize() {
+    private fun finalizeThis() {
         result = null
         onResult = null
         onError = null
         lambda = null
+    }
+
+ //TODO this class is not yet ready for the lifecycle
+    override fun finalize() {
+        finalizeThis()
     }
 }
