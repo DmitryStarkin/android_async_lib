@@ -57,7 +57,7 @@ currentThread() - task is performed in the calling thread
 
 mainThread() - task is performed in the main thread
 
-Executors, in addition to global ones, can be linked to the lifecycle of an Activity or Fragment using the connectToLifecycle(owner: LifecycleOwner) method
+Executors, in addition to global ones, can be linked to the [Lifecycle](https://developer.android.com/reference/androidx/lifecycle/Lifecycle?hl=ru) of an Activity or Fragment using the connectToLifecycle(owner: LifecycleOwner) method
 
 There are extensions for [LifecycleOwner](https://developer.android.com/reference/androidx/lifecycle/LifecycleOwner) that do this automatically
 
@@ -79,7 +79,7 @@ class SomeClass : AppCompatActivity() {
         this.newHandlerThread() //HandlerThread executor associated with the lifecycle of this activity
 
     private val executor2 =
-        (ExecutorsProvider.newHandlerThread() as HandlerThreadExecutor).connectToLifecycle(this) //do the same
+        (ExecutorsProvider.newHandlerThread() as LifecycleSupport).connectToLifecycle(this) //do the same
 
     fun someFun() {
         val inputStream: InputStream = File("example.txt").inputStream()
@@ -112,7 +112,8 @@ class SomeClass : AppCompatActivity() {
             { e -> textView.text = e.toString() }) // callback on main thread
         {
             it.inputStream().bufferedReader()
-                .use { reader -> reader.readText() }// execute on new thread, it represent parameter file
+                .use { reader -> reader.readText() }// execute on new thread, 
+                // it represent parameter file
         }
     }
 
@@ -187,8 +188,10 @@ class SomeClass : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        //(executor as HandlerThread).quit() this call is not needed here because the executor is associated with the lifecycle
-        //(executor2 as HandlerThread).quit() this call is not needed here because the executor2 is associated with the lifecycle
+        //(executor as HandlerThread).quit() this call is not needed here 
+        // because the executor is associated with the lifecycle
+        //(executor2 as HandlerThread).quit() this call is not needed here 
+        // because the executor2 is associated with the lifecycle
         ExecutorsProvider.globalSingleTreadPoll.purge() //clearing the task queue
         thread?.interrupt()
     }
