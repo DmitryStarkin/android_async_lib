@@ -5,14 +5,18 @@ and send lambda for update UI (like runOnUiThread in Android)
 **the library is currently under testing**
 
 ## Version:
+0.2.2b current
 
-0.2.0b current
+dependencies fix
+
+0.2.0b
 
 Add LifeCicle support
 
 Add HahdlerThread Executor
 
 0.1.0b
+
 first version
 
 ## Installation:
