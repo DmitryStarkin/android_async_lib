@@ -9,11 +9,15 @@ and send lambda for update UI (like runOnUiThread in Android)
 
 dependencies fix
 
+0.2.1b
+
+provider return real classes
+
 0.2.0b
 
-Add LifeCicle support
+Add LifeCycle support
 
-Add HahdlerThread Executor
+Add HandlerThread Executor
 
 0.1.0b
 
