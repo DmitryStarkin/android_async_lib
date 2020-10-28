@@ -2,6 +2,7 @@
 
 The library provide functions for easy execution of tasks in thread use lambda style,
 and send lambda for update UI (like runOnUiThread in Android)
+**the library is currently under testing**
 
 ## Version:
 
