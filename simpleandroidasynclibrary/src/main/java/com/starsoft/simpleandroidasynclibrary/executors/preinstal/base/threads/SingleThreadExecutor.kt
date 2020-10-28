@@ -14,10 +14,8 @@
 
 package com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.threads
 
-import androidx.lifecycle.LifecycleOwner
 import com.starsoft.simpleandroidasynclibrary.core.lifeciclesupport.interfaces.LifecycleSupport
 import java.util.concurrent.Executor
-
 
 // This File Created at 27.10.2020 11:50.
 
