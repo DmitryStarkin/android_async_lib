@@ -79,7 +79,7 @@ class SomeClass : AppCompatActivity() {
         this.newHandlerThread() //HandlerThread executor associated with the lifecycle of this activity
 
     private val executor2 =
-        (ExecutorsProvider.newHandlerThread() as LifecycleSupport).connectToLifecycle(this) //do the same
+        ExecutorsProvider.newHandlerThread().connectToLifecycle(this) //do the same
 
     fun someFun() {
         val inputStream: InputStream = File("example.txt").inputStream()
@@ -188,9 +188,9 @@ class SomeClass : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        //(executor as HandlerThread).quit() this call is not needed here 
+        //executor.quit() this call is not needed here 
         // because the executor is associated with the lifecycle
-        //(executor2 as HandlerThread).quit() this call is not needed here 
+        //executor2.quit() this call is not needed here 
         // because the executor2 is associated with the lifecycle
         ExecutorsProvider.globalSingleTreadPoll.purge() //clearing the task queue
         thread?.interrupt()

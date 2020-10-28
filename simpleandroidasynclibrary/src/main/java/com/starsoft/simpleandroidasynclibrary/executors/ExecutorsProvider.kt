@@ -41,7 +41,7 @@ object ExecutorsProvider {
      * This ThreadPool cant connect to Lifecycle
      * @since 0.1.0
      */
-    val globalSingleTreadPoll: ThreadPoolExecutor by lazy {
+    val globalSingleTreadPoll: SingleThreadPool by lazy {
         SingleThreadPool().apply { allowFinalize = false }
     }
 
@@ -54,7 +54,7 @@ object ExecutorsProvider {
      * This ThreadPool cant connect to Lifecycle
      * @since 0.1.0
      */
-    val globalMultiThreadPoll: ThreadPoolExecutor by lazy {
+    val globalMultiThreadPoll: MultiThreadPool by lazy {
         MultiThreadPool().apply { allowFinalize = false }
     }
 
@@ -81,14 +81,14 @@ object ExecutorsProvider {
      * @param id Id for this [HandlerThread][android.os.HandlerThread]
      * @since 0.1.1
      */
-    fun newHandlerThread(id :String = ""): Executor = HandlerThreadExecutor(id).apply { start() }
+    fun newHandlerThread(id :String = ""): HandlerThreadExecutor = HandlerThreadExecutor(id).apply { start() }
 
     /**
      * Providing [Executor] as a  new thread created for execution each time
      * @return [Executor] that uses a new thread to perform a task
      * @since 0.1.0
      */
-    fun newThread(): Executor = SingleThreadExecutor()
+    fun newThread(): SingleThreadExecutor = SingleThreadExecutor()
 
     /**
      * Providing [Executor] that executes a task in the thread where it was called
@@ -115,7 +115,7 @@ object ExecutorsProvider {
      * @return [ThreadPoolExecutor] with a single thread
      * @since 0.1.0
      */
-    fun newSingleThreadPool(): ThreadPoolExecutor = SingleThreadPool()
+    fun newSingleThreadPool(): SingleThreadPool = SingleThreadPool()
 
     /**
      * Providing [Executor] as a new thread pool with a starting number
@@ -123,5 +123,5 @@ object ExecutorsProvider {
      * and a maximum number of threads equal to the number of processors * 2.
      * @since 0.1.0
      */
-    fun newMultiThreadPoll(): ThreadPoolExecutor = MultiThreadPool()
+    fun newMultiThreadPoll(): MultiThreadPool = MultiThreadPool()
 }
