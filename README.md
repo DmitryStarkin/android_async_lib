@@ -88,7 +88,7 @@ class SomeClass : AppCompatActivity() {
         this.newHandlerThread() //HandlerThread executor associated with the lifecycle of this activity
 
     private val executor2 =
-        ExecutorsProvider.newHandlerThread().connectToLifecycle(this) //do the same
+        ExecutorsProvider.newHandlerThread().apply { connectToLifecycle(this@SomeClass) //do the same
 
     fun someFun() {
         val inputStream: InputStream = File("example.txt").inputStream()
