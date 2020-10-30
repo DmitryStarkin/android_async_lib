@@ -17,7 +17,6 @@ package com.starsoft.simpleandroidasynclibrary.core.lifeciclesupport.interfaces
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 
-
 // This File Created at 27.10.2020 11:34.
 
 /**

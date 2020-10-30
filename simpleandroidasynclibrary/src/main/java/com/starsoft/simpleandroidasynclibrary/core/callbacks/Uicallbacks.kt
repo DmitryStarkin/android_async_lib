@@ -12,6 +12,8 @@
  *  limitations under the License.
  */
 
+@file:JvmName("UiUtil")
+
 package com.starsoft.simpleandroidasynclibrary.core.callbacks
 
 import com.starsoft.simpleandroidasynclibrary.handlers.MainHandler

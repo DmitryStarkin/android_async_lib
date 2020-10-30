@@ -12,10 +12,12 @@
  *  limitations under the License.
  */
 
+@file:JvmName("ThreadUtil")
+
 package com.starsoft.simpleandroidasynclibrary.core.threadfun
 
 import com.starsoft.simpleandroidasynclibrary.core.executorfun.*
-import com.starsoft.simpleandroidasynclibrary.executors.ExecutorsProvider
+import com.starsoft.simpleandroidasynclibrary.executors.currentThread
 import com.starsoft.simpleandroidasynclibrary.stubs.stub
 import com.starsoft.simpleandroidasynclibrary.stubs.stubErrorCallback
 
@@ -35,13 +37,14 @@ import com.starsoft.simpleandroidasynclibrary.stubs.stubErrorCallback
  * is performed can be used for example for interrupting
  * @since 0.1.0
  */
+@JvmOverloads
 fun <T, R> T.runOnThread(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,
     _isDaemon: Boolean = false,
-    lambda: T.() -> R
+    lambda:  T.() -> R
 ): Thread = Thread {this.runOnExecutor(
-    ExecutorsProvider.currentThread(),
+    currentThread(),
     onResult,
     onError,
     lambda
@@ -64,6 +67,7 @@ fun <T, R> T.runOnThread(
  * is performed can be used for example for interrupting
  * @since 0.1.0
  */
+@JvmOverloads
 fun <T, R> runOnThreadWitch(
     receiver: T,
     onResult: (R) -> Unit = ::stub,
@@ -72,7 +76,7 @@ fun <T, R> runOnThreadWitch(
     lambda: T.() -> R
 ): Thread = Thread {
     runOnExecutorWitch(
-        ExecutorsProvider.currentThread(),
+        currentThread(),
         receiver,
         onResult,
         onError,
@@ -97,7 +101,7 @@ fun <T, R> runOnThreadWitch(
  * is performed can be used for example for interrupting
  * @since 0.1.0
  */
-
+@JvmOverloads
 fun <T, R> T.processingOnThread(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,
@@ -105,7 +109,7 @@ fun <T, R> T.processingOnThread(
     lambda: (T) -> R
 ): Thread = Thread {
     processingOnExecutor(
-        ExecutorsProvider.currentThread(),
+        currentThread(),
         onResult,
         onError,
         lambda
@@ -130,6 +134,7 @@ fun <T, R> T.processingOnThread(
  * is performed can be used for example for interrupting
  * @since 0.1.0
  */
+@JvmOverloads
 fun <T, R> handleOnThread(
     data: T,
     onResult: (R) -> Unit = ::stub,
@@ -138,7 +143,7 @@ fun <T, R> handleOnThread(
     lambda: (T) -> R
 ): Thread = Thread {
     handleOnExecutor(
-        ExecutorsProvider.currentThread(),
+        currentThread(),
         data,
         onResult,
         onError,
@@ -163,6 +168,7 @@ fun <T, R> handleOnThread(
  * is performed can be used for example for interrupting
  * @since 0.1.0
  */
+@JvmOverloads
 fun <T> T.prepareOnThreadAndRun(
     onResult: T.() -> Unit = ::rStub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,
@@ -170,7 +176,7 @@ fun <T> T.prepareOnThreadAndRun(
     lambda: T.() -> Unit
 ): Thread = Thread {
     prepareOnExecutorAndRun(
-        ExecutorsProvider.currentThread(),
+        currentThread(),
         onResult,
         onError,
         lambda

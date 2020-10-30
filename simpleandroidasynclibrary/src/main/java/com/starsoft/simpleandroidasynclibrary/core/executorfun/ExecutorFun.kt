@@ -12,6 +12,8 @@
  *  limitations under the License.
  */
 
+@file:JvmName("ExecutorUtil")
+
 package com.starsoft.simpleandroidasynclibrary.core.executorfun
 
 import com.starsoft.simpleandroidasynclibrary.runables.MainRunnable
@@ -35,6 +37,7 @@ import java.util.concurrent.Executor
  * @return a reference to the [Executor] in which the work
  * @since 0.1.0
  */
+@JvmOverloads
 fun <T, R> T.runOnExecutor(
     executor: Executor,
     onResult: (R) -> Unit = ::stub,
@@ -57,6 +60,7 @@ fun <T, R> T.runOnExecutor(
  * @return a reference to the [Executor] in which the work
  * @since 0.1.0
  */
+@JvmOverloads
 fun <T, R> runOnExecutorWitch(
     executor: Executor,
     receiver: T = TStub(),
@@ -80,6 +84,7 @@ fun <T, R> runOnExecutorWitch(
  * @return a reference to the [Executor] in which the work
  * @since 0.1.0
  */
+@JvmOverloads
 fun <T, R> T.processingOnExecutor(
     executor: Executor,
     onResult: (R) -> Unit = ::stub,
@@ -104,6 +109,7 @@ fun <T, R> T.processingOnExecutor(
  * @return a reference to the [Executor] in which the work
  * @since 0.1.0
  */
+@JvmOverloads
 fun <T, R> handleOnExecutor(
     executor: Executor,
     data: T,
@@ -128,6 +134,7 @@ fun <T, R> handleOnExecutor(
  * is performed
  * @since 0.1.0
  */
+@JvmOverloads
 fun <T> T.prepareOnExecutorAndRun(
     executor: Executor,
     onResult: T.() -> Unit = ::rStub,
@@ -153,3 +160,10 @@ fun <T> T.rStub(t: T) {
 }
 
 
+interface  Stub<T>: (T) -> Unit {
+    override fun invoke(p1: T) {
+        dd(p1)
+    }
+
+    fun dd(t: T)
+}

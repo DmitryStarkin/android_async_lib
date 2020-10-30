@@ -12,57 +12,65 @@
  *  limitations under the License.
  */
 
+@file:JvmName("AsyncOperation")
+
 package com.starsoft.simpleandroidasynclibrary.core
 
 import com.starsoft.simpleandroidasynclibrary.core.executorfun.handleOnExecutor
 import com.starsoft.simpleandroidasynclibrary.core.executorfun.runOnExecutor
 import com.starsoft.simpleandroidasynclibrary.core.executorfun.runOnExecutorWitch
-import com.starsoft.simpleandroidasynclibrary.executors.ExecutorsProvider
+import com.starsoft.simpleandroidasynclibrary.executors.globalHandlerThread
+import com.starsoft.simpleandroidasynclibrary.executors.globalMultiThreadPoll
+import com.starsoft.simpleandroidasynclibrary.executors.globalSingleTreadPoll
 import com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.handlerthreads.HandlerThreadExecutor
+import com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.threadpools.MultiThreadPool
+import com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.threadpools.SingleThreadPool
 import com.starsoft.simpleandroidasynclibrary.stubs.stub
 import com.starsoft.simpleandroidasynclibrary.stubs.stubErrorCallback
 import java.util.concurrent.Executor
-import java.util.concurrent.ThreadPoolExecutor
 
 //This File Created at 26.10.2020 13:57.
 
 /**
  * @since 0.1.0
  */
+@JvmOverloads
 fun <T, R> T.runOnGlobalSinglePool(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,
     lambda: T.() -> R
-): ThreadPoolExecutor = this.runOnExecutor(
-    ExecutorsProvider.globalSingleTreadPoll,
+): SingleThreadPool = this.runOnExecutor(
+    globalSingleTreadPoll,
     onResult,
     onError,
     lambda
-) as ThreadPoolExecutor
+) as SingleThreadPool
 
 /**
  * @since 0.1.0
  */
+@JvmOverloads
 fun <T, R> T.runOnGlobalMultiPool(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,
     lambda: T.() -> R
-): ThreadPoolExecutor = this.runOnExecutor(
-    ExecutorsProvider.globalMultiThreadPoll,
+): MultiThreadPool = this.runOnExecutor(
+    globalMultiThreadPoll,
     onResult,
     onError,
     lambda
-) as ThreadPoolExecutor
+) as MultiThreadPool
 
 /**
  * @since 0.1.1
  */
+@JvmOverloads
 fun <T, R> T.runOnGlobalHandlerThread(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,
     lambda: T.() -> R
 ): HandlerThreadExecutor = this.runOnExecutor(
-    ExecutorsProvider.globalHandlerThread,
+    globalHandlerThread,
     onResult,
     onError,
     lambda
@@ -71,36 +79,40 @@ fun <T, R> T.runOnGlobalHandlerThread(
 /**
  * @since 0.1.0
  */
+@JvmOverloads
 fun <R> runOnGlobalSinglePool(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,
     lambda: (Unit) -> R
-): ThreadPoolExecutor =
-    ExecutorsProvider.globalSingleTreadPoll.run(onResult, onError, lambda) as ThreadPoolExecutor
+): SingleThreadPool =
+    globalSingleTreadPoll.launch(onResult, onError, lambda) as SingleThreadPool
 
 /**
  * @since 0.1.1
  */
+@JvmOverloads
 fun <R> runOnGlobalHandlerThread(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,
     lambda: (Unit) -> R
 ): HandlerThreadExecutor =
-    ExecutorsProvider.globalHandlerThread.run(onResult, onError, lambda) as HandlerThreadExecutor
+    globalHandlerThread.launch(onResult, onError, lambda) as HandlerThreadExecutor
 
 /**
  * @since 0.1.0
  */
+@JvmOverloads
 fun <R> runOnGlobalMultiPool(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,
     lambda: (Unit) -> R
-): ThreadPoolExecutor =
-    ExecutorsProvider.globalMultiThreadPoll.run(onResult, onError, lambda) as ThreadPoolExecutor
+): MultiThreadPool =
+    globalMultiThreadPoll.launch(onResult, onError, lambda) as MultiThreadPool
 
 /**
  * @since 0.1.0
  */
+@JvmOverloads
 fun <T, R> Executor.executeWitch(
     receiver: T,
     onResult: (R) -> Unit = ::stub,
@@ -111,6 +123,7 @@ fun <T, R> Executor.executeWitch(
 /**
  * @since 0.1.0
  */
+@JvmOverloads
 fun <T, R> Executor.handle(
     data: T,
     onResult: (R) -> Unit = ::stub,
@@ -121,7 +134,8 @@ fun <T, R> Executor.handle(
 /**
  * @since 0.1.0
  */
-fun <R> Executor.run(
+@JvmOverloads
+fun <R> Executor.launch(
     onResult: (R) -> Unit = ::stub,
     onError: (Throwable) -> Unit = ::stubErrorCallback,
     lambda: (Unit) -> R

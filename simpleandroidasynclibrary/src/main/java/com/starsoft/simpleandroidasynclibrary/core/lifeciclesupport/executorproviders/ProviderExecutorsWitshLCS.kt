@@ -12,17 +12,21 @@
  *  limitations under the License.
  */
 
-package com.starsoft.simpleandroidasynclibrary.core.lifeciclesupport.extends
+@file:JvmName("LifeCycleExecutors")
+
+package com.starsoft.simpleandroidasynclibrary.core.lifeciclesupport.executorproviders
 
 import androidx.lifecycle.LifecycleOwner
-import com.starsoft.simpleandroidasynclibrary.executors.ExecutorsProvider
+import com.starsoft.simpleandroidasynclibrary.executors.newHandlerThread
+import com.starsoft.simpleandroidasynclibrary.executors.newMultiThreadPoll
+import com.starsoft.simpleandroidasynclibrary.executors.newSingleThreadPool
+import com.starsoft.simpleandroidasynclibrary.executors.newThread
 import com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.handlerthreads.HandlerThreadExecutor
 import com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.threadpools.MultiThreadPool
 import com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.threadpools.SingleThreadPool
 import com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.threads.SingleThreadExecutor
 import java.util.concurrent.Executor
 import java.util.concurrent.ThreadPoolExecutor
-
 
 // This File Created at 27.10.2020 11:36.
 
@@ -34,9 +38,9 @@ import java.util.concurrent.ThreadPoolExecutor
  * keeps track of the life cycle (shutdown in onDestroy)
  * @since 0.1.1
  */
-fun LifecycleOwner.newSingleThreadPoll(): ThreadPoolExecutor =
-    ExecutorsProvider.newSingleThreadPool()
-        .apply { (this as SingleThreadPool).connectToLifecycle(this@newSingleThreadPoll) }
+fun LifecycleOwner.getSingleThreadPool(): SingleThreadPool =
+    newSingleThreadPool()
+        .apply { this.connectToLifecycle(this@getSingleThreadPool) }
 
 /**
  * Extension for LifecycleOwner creates the [Executor]
@@ -50,9 +54,9 @@ fun LifecycleOwner.newSingleThreadPoll(): ThreadPoolExecutor =
  * keeps track of the life cycle (shutdown in onDestroy)
  * @since 0.1.1
  */
-fun LifecycleOwner.newMultiThreadPoll(): ThreadPoolExecutor =
-    ExecutorsProvider.newMultiThreadPoll()
-        .apply { (this as MultiThreadPool).connectToLifecycle(this@newMultiThreadPoll) }
+fun LifecycleOwner.getMultiThreadPoll(): MultiThreadPool =
+    newMultiThreadPoll()
+        .apply { this.connectToLifecycle(this@getMultiThreadPoll) }
 
 /**
  * Extension for LifecycleOwner creates the [Executor]
@@ -62,9 +66,9 @@ fun LifecycleOwner.newMultiThreadPoll(): ThreadPoolExecutor =
  * keeps track of the life cycle (interrupt in onDestroy)
  * @since 0.1.1
  */
-fun LifecycleOwner.newThread(): Executor =
-    ExecutorsProvider.newThread()
-        .apply { (this as SingleThreadExecutor).connectToLifecycle(this@newThread) }
+fun LifecycleOwner.getThread(): SingleThreadExecutor =
+    newThread()
+        .apply { this.connectToLifecycle(this@getThread) }
 
 /**
  * Extension for LifecycleOwner creates the [Executor]
@@ -76,6 +80,7 @@ fun LifecycleOwner.newThread(): Executor =
  * @param id Id for this [HandlerThread][android.os.HandlerThread]
  * @since 0.1.1
  */
-fun LifecycleOwner.newHandlerThread(id: String = ""): Executor =
-    ExecutorsProvider.newHandlerThread(id)
-        .apply { (this as HandlerThreadExecutor).connectToLifecycle(this@newHandlerThread) }
+@JvmOverloads
+fun LifecycleOwner.getHandlerThread(id: String = ""): HandlerThreadExecutor =
+    newHandlerThread(id)
+        .apply { this.connectToLifecycle(this@getHandlerThread) }

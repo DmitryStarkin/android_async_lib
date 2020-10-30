@@ -21,7 +21,6 @@ import com.starsoft.simpleandroidasynclibrary.core.lifeciclesupport.interfaces.L
 import java.lang.Exception
 import java.util.concurrent.Executor
 
-
 // This File Created at 27.10.2020 13:10.
 
 /**

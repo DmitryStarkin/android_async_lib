@@ -12,9 +12,10 @@
  *  limitations under the License.
  */
 
+@file:JvmName("ExecutorsProvider")
+
 package com.starsoft.simpleandroidasynclibrary.executors
 
-import android.os.HandlerThread
 import com.starsoft.simpleandroidasynclibrary.core.utils.isMainThread
 import com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.handlerthreads.HandlerThreadExecutor
 import com.starsoft.simpleandroidasynclibrary.executors.preinstal.base.threadpools.MultiThreadPool
@@ -24,7 +25,6 @@ import com.starsoft.simpleandroidasynclibrary.handlers.MainHandler
 import java.util.concurrent.Executor
 import java.util.concurrent.ThreadPoolExecutor
 
-
 //This File Created at 25.10.2020 17:33.
 
 /**
@@ -32,7 +32,7 @@ import java.util.concurrent.ThreadPoolExecutor
  * @since 0.1.0
  */
 
-object ExecutorsProvider {
+//object ExecutorsProvider {
 
     /**
      * Providing [Executor] as a thread pool with a single thread
@@ -81,6 +81,7 @@ object ExecutorsProvider {
      * @param id Id for this [HandlerThread][android.os.HandlerThread]
      * @since 0.1.1
      */
+    @JvmOverloads
     fun newHandlerThread(id :String = ""): HandlerThreadExecutor = HandlerThreadExecutor(id).apply { start() }
 
     /**
@@ -124,4 +125,4 @@ object ExecutorsProvider {
      * @since 0.1.0
      */
     fun newMultiThreadPoll(): MultiThreadPool = MultiThreadPool()
-}
+//}

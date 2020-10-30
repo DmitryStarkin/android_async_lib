@@ -1,11 +1,15 @@
 # A small Kotlin library for asynchronous task on Android
 
-The library provide functions for easy execution of tasks in thread use lambda style,
+The library for Kotlin provide functions for easy execution of tasks in thread use lambda style,
 and send lambda for update UI (like runOnUiThread in Android)
 **the library is currently under testing**
 
 ## Version:
-0.2.2b current
+0.3.0b current
+
+improvements usage from Java
+
+0.2.2b
 
 dependencies fix
 
@@ -77,18 +81,19 @@ For convenience the library includes extension functions for the Executor interf
 
 Regardless of where the task is executed **callbacks are always executed in the main thread**
 
-Code example
+See [Docs](https://dmitrystarkin.github.io/android_async_lib/)
 
+#### *Kotlin code example*
 ```kotlin
 class SomeClass : AppCompatActivity() {
 
     private val textView: TextView = TextView(this) //for example
     var thread: Thread? = null
     private val executor =
-        this.newHandlerThread() //HandlerThread executor associated with the lifecycle of this activity
+        this.getHandlerThread() //HandlerThread executor associated with the lifecycle of this activity
 
     private val executor2 =
-        ExecutorsProvider.newHandlerThread().apply { connectToLifecycle(this@SomeClass) //do the same
+        newHandlerThread().apply { connectToLifecycle(this@SomeClass) } //do the same
 
     fun someFun() {
         val inputStream: InputStream = File("example.txt").inputStream()
@@ -121,8 +126,7 @@ class SomeClass : AppCompatActivity() {
             { e -> textView.text = e.toString() }) // callback on main thread
         {
             it.inputStream().bufferedReader()
-                .use { reader -> reader.readText() }// execute on new thread, 
-                // it represent parameter file
+                .use { reader -> reader.readText() }// execute on new thread, it represent parameter file
         }
     }
 
@@ -132,7 +136,7 @@ class SomeClass : AppCompatActivity() {
         val file = File("example.txt")
         //start operation on given Executor
         runOnExecutor(
-            ExecutorsProvider.globalSingleTreadPoll,
+            globalSingleTreadPoll,
             { text -> textView.text = text }, // callback on main thread
             { e -> textView.text = e.toString() }) // callback on main thread
         {
@@ -146,7 +150,7 @@ class SomeClass : AppCompatActivity() {
         val file = File("example.txt")
         //start operation on given Executor
         file.runOnExecutor(
-            ExecutorsProvider.globalSingleTreadPoll,
+            globalSingleTreadPoll,
             { text -> textView.text = text }) // callback on main thread
         // stub error wil be use (just throws error)
         { inputStream().bufferedReader().use { it.readText() } }// execute on threadPool
@@ -176,7 +180,7 @@ class SomeClass : AppCompatActivity() {
 
         val file = File("example.txt")
         //start operation on on HandlerThread
-        executor.run(
+        executor.launch(
             { text -> textView.text = text }, // callback on main thread
             { e -> textView.text = e.toString() }) // callback on main thread
         {
@@ -187,7 +191,7 @@ class SomeClass : AppCompatActivity() {
 
     fun someFun8() {
         // print new value in textView every 1 second 100 times
-        executor2.run { // start task on HandlerThread use stub as result and error callbacks
+        executor2.launch { // start task on HandlerThread use stub as result and error callbacks
             for (i in 0..100) {
                 Thread.sleep(1000)
                 runOnUI { textView.text = i.toString() } // execute lambda on UI thread
@@ -197,16 +201,101 @@ class SomeClass : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        //executor.quit() this call is not needed here 
-        // because the executor is associated with the lifecycle
-        //executor2.quit() this call is not needed here 
-        // because the executor2 is associated with the lifecycle
-        ExecutorsProvider.globalSingleTreadPoll.purge() //clearing the task queue
+        //executor.quit() this call is not needed here because the executor is associated with the lifecycle
+        //executor2.quit() this call is not needed here because the executor2 is associated with the lifecycle
+        globalSingleTreadPoll.purge() //clearing the task queue
         thread?.interrupt()
     }
 }
 
 ```
 
+#### *Java code example*
+```java
+class TestClass extends AppCompatActivity {
 
-See [Docs](https://dmitrystarkin.github.io/android_async_lib/)
+
+    private TextView textField = new TextView(this); //for example
+    Thread thread = null;
+    //HandlerThread executor associated with the lifecycle of this activity
+    HandlerThreadExecutor executor = LifeCycleExecutors.getHandlerThread(this);
+    HandlerThreadExecutor executor2 = ExecutorsProvider.newHandlerThread();
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        executor2.connectToLifecycle(this);
+    }
+
+    void someFun() throws FileNotFoundException {
+        File file = new File("example.txt");
+        //start operation on new Thread
+        thread = ThreadUtil.runOnThread(file,
+                s -> {
+                    textField.setText(s);
+                    return Unit.INSTANCE;
+                },// callback on main thread in Java code must return Unit.INSTANCE or null :(
+                e -> {
+                    textField.setText(e.toString());
+                    return null;
+                }, // callback on main thread in Java code must return Unit.INSTANCE or null :(
+                f -> {
+                    BufferedReader reader = null;
+                    String text = null;
+                    try {
+                        try {
+                            reader = new BufferedReader(new FileReader(f));
+                            text = reader.readLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } finally {
+                        try {
+                            reader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    return text;
+                }); // execute on new thread, we must handle some Exception in Java
+    }
+
+    void someFun1() {
+        // print new value in textView every 1 second 100 times
+        AsyncOperation.launch(executor2, u -> { //The function has the unit type that is passed so we must explicitly specify the parameter
+            for (int i = 0; i < 100; i++) {
+                int finalI = i;
+                UiUtil.runInUI(() -> {
+                    textField.setText(finalI);
+                    return null; // callback on main thread in Java code must return Unit.INSTANCE or null :(
+                });
+            }
+            return null; // lambda on main thread in Java code must return Unit.INSTANCE or null :(
+        });
+    }
+    
+    void someFun2() {
+        // print new value in textView every 1 second 100 times. 
+        AsyncOperation.runOnGlobalMultiPool(u -> { //The function has the unit type that is passed so we must explicitly specify the parameter
+            for (int i = 0; i < 100; i++) {
+                int finalI = i;
+                UiUtil.runInUI(() -> {
+                    textField.setText(finalI);
+                    return null; // callback on main thread in Java code must return Unit.INSTANCE or null :(
+                });
+            }
+            return null; // lambda on main thread in Java code must return Unit.INSTANCE or null :(
+        });
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //executor.quit() this call is not needed here because the executor is associated with the lifecycle
+        //executor2.quit() this call is not needed here because the executor2 is associated with the lifecycle
+        ExecutorsProvider.getGlobalSingleTreadPoll().purge(); //clearing the task queue
+        thread.interrupt();
+    }
+}
+```

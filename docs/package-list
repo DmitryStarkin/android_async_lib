@@ -1,7 +1,7 @@
 com.starsoft.simpleandroidasynclibrary.core
 com.starsoft.simpleandroidasynclibrary.core.callbacks
 com.starsoft.simpleandroidasynclibrary.core.executorfun
-com.starsoft.simpleandroidasynclibrary.core.lifeciclesupport.extends
+com.starsoft.simpleandroidasynclibrary.core.lifeciclesupport.executorproviders
 com.starsoft.simpleandroidasynclibrary.core.lifeciclesupport.interfaces
 com.starsoft.simpleandroidasynclibrary.core.threadfun
 com.starsoft.simpleandroidasynclibrary.core.utils
