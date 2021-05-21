@@ -5,7 +5,7 @@ and send lambda for update UI (like runOnUiThread in Android)
 **the library is currently under testing**
 
 ## Version:
-0.3.0b current
+0.3.1b current
 
 improvements usage from Java
 
