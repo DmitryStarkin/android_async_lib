@@ -21,7 +21,7 @@ import androidx.lifecycle.LifecycleOwner
 
 /**
  * Provides lifecycle support, classes implementing this interface
- * must provide work completion in the finalize()[finalize] method
+ * must provide work completion in the finalize()[finalizeTask] method
  * @since 0.1.1
  */
 
@@ -56,7 +56,7 @@ interface LifecycleSupport : DefaultLifecycleObserver {
      * */
     override fun onDestroy(owner: LifecycleOwner) {
         disconnectFromLifecycle(owner)
-        finalize()
+        finalizeTask()
     }
 
     /**
@@ -65,5 +65,5 @@ interface LifecycleSupport : DefaultLifecycleObserver {
      * must provide work completion in this method
      * @since 0.1.1
      */
-    fun finalize()
+    fun finalizeTask()
 }

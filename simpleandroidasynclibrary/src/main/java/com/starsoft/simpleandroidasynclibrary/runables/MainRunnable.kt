@@ -83,7 +83,7 @@ class MainRunnable<T, V>(
     }
 
  //TODO this class is not yet ready for the lifecycle
-    override fun finalize() {
+    override fun finalizeTask() {
         finalizeThis()
     }
 }

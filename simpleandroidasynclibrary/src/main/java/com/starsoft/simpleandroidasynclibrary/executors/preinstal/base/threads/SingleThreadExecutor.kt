@@ -44,7 +44,7 @@ class SingleThreadExecutor : Executor, LifecycleSupport {
      * @suppress
      * @since 0.1.1
      * */
-    override fun finalize() {
+    override fun finalizeTask() {
         destroyed = true
         if (::thread.isInitialized) {
             thread.interrupt()

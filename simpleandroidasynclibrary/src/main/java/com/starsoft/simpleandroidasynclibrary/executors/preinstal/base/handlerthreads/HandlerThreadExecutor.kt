@@ -60,7 +60,7 @@ class HandlerThreadExecutor(id: String, priority: Int = Process.THREAD_PRIORITY_
      * @suppress
      * @since 0.1.1
      * */
-    override fun finalize() {
+    override fun finalizeTask() {
 
         if (allowFinalize) {
             isWork = false

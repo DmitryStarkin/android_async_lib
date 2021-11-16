@@ -114,7 +114,7 @@ abstract class AbstractThreadPool : ThreadPoolExecutor(
         }
     }
 
-    override fun finalize() {
+    override fun finalizeTask() {
         if (allowFinalize) {
             shutdownNow()
         } else {
