@@ -38,7 +38,10 @@ class MainRunnable<T, V>(
 
     override fun run() {
             try {
-                result = data?.let { lambda?.invoke(it) }
+                result = data?.let { data ->
+                    lambda?.let {lambda ->
+                        lambda(data)}
+                }
                 command(DELIVER_RESULT)
             } catch (e: Throwable) {
                 e.printStackTrace()
