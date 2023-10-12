@@ -5,7 +5,7 @@ and send lambda for update UI (like runOnUiThread in Android)
 **the library is currently under testing**
 
 ## Version:
-0.4.2b current
+0.4.3b current
 
 dependencies update
 
@@ -42,6 +42,17 @@ repositories {
         maven { url "https://jitpack.io" }
         }
    }
+```
+or in setting.gradle add:
+
+```
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+    ......
+    maven { url 'https://jitpack.io' }
+    }
+}
 ```
 
 2 in module level build.gradle add:
